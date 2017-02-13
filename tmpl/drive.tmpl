@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <title>FCloud</title>
+    <link href="/images/fcloud.ico" rel="shortcut icon" type="image/x-icon" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/user/{{.User}}/home">Home</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <form enctype="multipart/form-data" id="upload_form" method="post" action="/user/{{.User}}/file/upload">
+  	<fieldset>
+  	  <label><h4>上傳檔案</h4></label>
+  	  <input id="file_input" name="file" type="file">
+  	  <input id="submit" class="btn btn-primary btn-small" type="submit" value="upload now!">
+  	</fieldset>
+      </form>
+    </div>
+
+    <div class="container">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>名稱</th>
+            <th>大小</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{range .Files}}
+          <tr>
+            <td>{{.Name}}</td>
+            <td>{{.Size}}</td>
+            <td>
+              <div style="width:60px;float:left" >
+                  <button type="button" class="btn btn-success" onclick="location.href='/user/{{.Owner}}/file/download/{{.Name}}'" >下載</button>
+              </div>
+              <div style="width:60px;float:left;clear:right" >
+                  <button type="button" class="btn btn-danger" onclick="location.href='/user/{{.Owner}}/file/delete/{{.Name}}'" >刪除</button>
+              </div>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

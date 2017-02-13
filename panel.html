@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <!-- 最新編譯和最佳化的 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><a href="/user/frozenkp/home">Home</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+      <form id="upload_form" method="post" action="/user/frozenkp/upload">
+  			<fieldset>
+  				<label><h4>上傳檔案</h4></label>
+  				<input id="file_input" name="file" type="file">
+  				<input id="submit" class="btn btn-primary btn-small" type="submit" value="upload now!">
+  			</fieldset>
+  		</form>
+    </div>
+
+    <div class="container">
+      <table class="table table-hover">
+        <caption>檔案</caption>
+        <thead>
+          <tr>
+            <th>名稱</th>
+            <th>大小</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>server.go</td>
+            <td>5k</td>
+            <td>
+              <div style="width:60px;float:left" >
+                <form action="/user/frozenkp/file/download" method="post" >
+                  <input type="hidden" name="name" value="test" />
+                  <button type="submit" class="btn btn-success">下載</button>
+                </form>
+              </div>
+              <div style="width:60px;float:left;clear:right" >
+                <form action="/user/frozenkp/file/delete" method="post" >
+                  <input type="hidden" name="name" value="test" />
+                  <button type="submit" class="btn btn-danger">刪除</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Sachin</td>
+            <td>Mumbai</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
