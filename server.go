@@ -70,7 +70,7 @@ func home(c *gin.Context){
     files:=strings.Split(string(list),"\n")
     f:=make([]File,0)
     for i:=0;i<len(files)-1;i++ {
-      info:=strings.Split(files[i]," ")
+      info:=strings.Split(files[i],"*")
       f=append(f,File{user,info[0],info[1]})
     }
     //write html
