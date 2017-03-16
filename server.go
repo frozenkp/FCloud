@@ -19,6 +19,16 @@ type File struct{
   Size  string
 }
 
+type HostSwitch map[string]http.Handler
+
+func (hs HostSwitch) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+  if handler := hs[r.Host]; handler != nil {
+    handler.ServeHTTP(w, r)
+  } else {
+    http.Error(w, "Forbidden", 403) // Or Redirect?
+  }
+}
+
 var users map[string]string
 
 func initial(){
@@ -150,6 +160,8 @@ func download(c *gin.Context){
 func main(){
   initial()
 
+  hs := make(HostSwitch)
+
   router := gin.Default()
 
   router.LoadHTMLGlob("./tmpl/*")
@@ -165,5 +177,7 @@ func main(){
   router.GET("/user/:name/file/download/:filename", download)
   router.POST("/user/:name/file/upload", upload)
 
-  router.Run(":8080")
+  hs["fcloud.nctu.me:65533"] = router
+
+  http.ListenAndServe(":65533", hs)
 }
