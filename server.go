@@ -177,7 +177,7 @@ func main(){
   router.GET("/user/:name/file/download/:filename", download)
   router.POST("/user/:name/file/upload", upload)
 
-  hs["fcloud.nctu.me:65533"] = router
+  hs["example.com:65533"] = router
 
   http.ListenAndServe(":65533", hs)
 }
